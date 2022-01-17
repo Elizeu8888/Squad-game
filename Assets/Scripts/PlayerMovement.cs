@@ -68,30 +68,16 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
 
-
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;// finds direction of movement
-
-
-
-
             if (!punching)
             {
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetangle, ref turnsmoothvelocity, turnsmoothing);// makes it so the player faces its movement direction
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);// makes it so the player faces its movement direction
             }
 
-
-            /*if (!isgrounded && velocity.y <= 0)
-            {
-                //velocity.y += -9f * Time.deltaTime;  // here you fall faster the longer you fall
-                //rb.MovePosition(velocity * Time.deltaTime);
-                velocity.y = -10f;
-            }*/
-
-
             Vector3 movedir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward * Time.deltaTime;// here is the movement
             rb.AddForce(movedir.normalized * speed * Time.deltaTime, ForceMode.Impulse);
-        }//this is doing all the movement
+        }
         else if(isgrounded == true)
         {
 
